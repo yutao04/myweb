@@ -4,7 +4,7 @@ import sys
 # グローバル変数
 WIDTH, HEIGHT = 600, 600
 LINE_COLOR = (0, 0, 0)
-CELL_SIZE = WIDTH // 20
+CELL_SIZE = WIDTH // 5
 
 # 画面の初期化
 pygame.init()
