@@ -4,7 +4,7 @@ import sys
 # グローバル変数
 WIDTH, HEIGHT = 600, 600
 LINE_COLOR = (0, 0, 0)
-CELL_SIZE = WIDTH // 5
+CELL_SIZE = WIDTH // 20
 
 # 画面の初期化
 pygame.init()
@@ -19,7 +19,7 @@ def draw_board(board):
     screen.fill((0, 128, 0))  # 緑で塗りつぶす
 
     # 盤面の線を描画
-    for i in range(1, 5):
+    for i in range(1, 20):
         pygame.draw.line(screen, LINE_COLOR, (i * CELL_SIZE, 0), (i * CELL_SIZE, HEIGHT), 2)
         pygame.draw.line(screen, LINE_COLOR, (0, i * CELL_SIZE), (WIDTH, i * CELL_SIZE), 2)
 
@@ -53,7 +53,7 @@ def is_full(board):
     return True
 
 def main():
-    board = [[" " for _ in range(20)] for _ in range(20)]
+    board = [[" " for _ in range(5)] for _ in range(5)]
     players = ["X", "O"]
     turn = 0
 
