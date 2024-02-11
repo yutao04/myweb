@@ -4,15 +4,19 @@ import sys
 # グローバル変数
 WIDTH, HEIGHT = 600, 600
 LINE_COLOR = (0, 0, 0)
-CELL_SIZE = WIDTH // 5
+CELL_SIZE = WIDTH // 20
 
 # 画面の初期化
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("五目並べ")
 
+# オセロの駒の色
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
 def draw_board(board):
-    screen.fill((255, 255, 255))  # 白で塗りつぶす
+    screen.fill((0, 128, 0))  # 緑で塗りつぶす
 
     # 盤面の線を描画
     for i in range(1, 5):
@@ -23,12 +27,9 @@ def draw_board(board):
     for row in range(5):
         for col in range(5):
             if board[row][col] == 'X':
-                pygame.draw.line(screen, LINE_COLOR, (col * CELL_SIZE + 20, row * CELL_SIZE + 20),
-                                 ((col + 1) * CELL_SIZE - 20, (row + 1) * CELL_SIZE - 20), 2)
-                pygame.draw.line(screen, LINE_COLOR, ((col + 1) * CELL_SIZE - 20, row * CELL_SIZE + 20),
-                                 (col * CELL_SIZE + 20, (row + 1) * CELL_SIZE - 20), 2)
+                pygame.draw.circle(screen, BLACK, (col * CELL_SIZE + CELL_SIZE // 2, row * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
             elif board[row][col] == 'O':
-                pygame.draw.circle(screen, LINE_COLOR, (col * CELL_SIZE + CELL_SIZE // 2, row * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 2 - 20, 2)
+                pygame.draw.circle(screen, WHITE, (col * CELL_SIZE + CELL_SIZE // 2, row * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
 
 def check_win(board, player):
     # 横のチェック
@@ -52,7 +53,7 @@ def is_full(board):
     return True
 
 def main():
-    board = [[" " for _ in range(5)] for _ in range(5)]
+    board = [[" " for _ in range(20)] for _ in range(20)]
     players = ["X", "O"]
     turn = 0
 
