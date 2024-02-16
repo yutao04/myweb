@@ -13,38 +13,16 @@ CELL_SIZE = WIDTH // 20
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("五目並べ")
+# 緑で塗りつぶす
 screen.fill((0, 128, 0))
+# 盤面の線を描画
+for i in range(1, 20):
+        pygame.draw.line(screen, LINE_COLOR, (i * CELL_SIZE, 0), (i * CELL_SIZE, HEIGHT), 2)
+        pygame.draw.line(screen, LINE_COLOR, (0, i * CELL_SIZE), (WIDTH, i * CELL_SIZE), 2)
 
 # オセロの駒の色
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-
-def draw_board(board):
-    #screen.fill((0, 128, 0))  # 緑で塗りつぶす
-
-    # 盤面の線を描画
-    for i in range(1, 20):
-        pygame.draw.line(screen, LINE_COLOR, (i * CELL_SIZE, 0), (i * CELL_SIZE, HEIGHT), 2)
-        pygame.draw.line(screen, LINE_COLOR, (0, i * CELL_SIZE), (WIDTH, i * CELL_SIZE), 2)
-
-    # マーカーを描画
-    '''for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:  # 左クリック    
-                for row in range(20):
-                    for col in range(20):
-                        if board[row][col] == 'X':
-                            n = random.randint(0,99)
-                            if n < 80:
-                                pygame.draw.circle(screen, BLACK, (col * CELL_SIZE + CELL_SIZE // 2, row * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
-                            else :
-                                pygame.draw.circle(screen, WHITE, (col * CELL_SIZE + CELL_SIZE // 2, row * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
-                        elif board[row][col] == 'O':
-                            n = random.randint(0,99)
-                            if n < 80:
-                                pygame.draw.circle(screen, WHITE, (col * CELL_SIZE + CELL_SIZE // 2, row * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)
-                            else :
-                                pygame.draw.circle(screen, BLACK, (col * CELL_SIZE + CELL_SIZE // 2, row * CELL_SIZE + CELL_SIZE // 2), CELL_SIZE // 3)'''
 
 def check_win(board, player):
     # 横のチェック
@@ -109,17 +87,16 @@ def main():
                         player = players[turn % 2]
                         board[row][col] = player
                         if check_win(board, player):
-                            messagebox.showinfo("勝者",f"プレイヤー{player}の勝利!" )
+                            messagebox.showinfo("勝敗",f"プレイヤー{player}の勝利!" )
                             print(f"Player {player} の勝利です！")
                             running = False
                         elif is_full(board):
-                            messagebox.showinfo("引き分け",f"引き分け")
+                            messagebox.showinfo("勝敗",f"引き分け")
                             print("引き分けです！")
                             running = False
                         else:
                             turn += 1
 
-        draw_board(board)
         pygame.display.flip()
 
     pygame.quit()
